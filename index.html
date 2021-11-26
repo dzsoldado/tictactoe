@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+<body>
+  <div id="container">
+    <h1 id="center">
+    TIC TAC TOE
+    </h1>
+    <div id="params">
+      <button id="X" onclick="createGame(this.id)">X</button>
+      <button id="O" onclick="createGame(this.id)">O</button>
+    </div>
+    <div><button onclick="reset()">RESET</button></div>
+    <div id="board">
+      <div class="case" id="0" onclick="checkCase(this)"></div>
+      <div class="case" id="1" onclick="checkCase(this)"></div>
+      <div class="case" id="2" onclick="checkCase(this)"></div>
+      <div class="case" id="3" onclick="checkCase(this)"></div>
+      <div class="case" id="4" onclick="checkCase(this)"></div>
+      <div class="case" id="5" onclick="checkCase(this)"></div>
+      <div class="case" id="6" onclick="checkCase(this)"></div>
+      <div class="case" id="7" onclick="checkCase(this)"></div>
+      <div class="case" id="8" onclick="checkCase(this)"></div>
+    </div>
+
+
+
+  </div>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
