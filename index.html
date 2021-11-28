@@ -7,29 +7,38 @@
   <title>Document</title>
 </head>
 <body>
+  <div id="message" class="hidden">
+    <p id="message-content">Player 2 won!</p>
+    <button class="btn" onclick="hideMessage()">Play again</button>
+
+  </div>
   <div id="container">
     <h1 id="center">
     TIC TAC TOE
     </h1>
     <div id="params">
-      <button id="X" onclick="createGame(this.id)">X</button>
-      <button id="O" onclick="createGame(this.id)">O</button>
+      <p>Choose your symbol</p>
+      <div>
+        <button class="btn btn-symbol" id="X" onclick="createGame(this.id)">X</button>
+        <button class="btn btn-symbol" id="O" onclick="createGame(this.id)">O</button>
+      </div>
     </div>
-    <div><button onclick="reset()">RESET</button></div>
-    <div id="board">
-      <div class="case" id="0" onclick="checkCase(this)"></div>
-      <div class="case" id="1" onclick="checkCase(this)"></div>
-      <div class="case" id="2" onclick="checkCase(this)"></div>
-      <div class="case" id="3" onclick="checkCase(this)"></div>
-      <div class="case" id="4" onclick="checkCase(this)"></div>
-      <div class="case" id="5" onclick="checkCase(this)"></div>
-      <div class="case" id="6" onclick="checkCase(this)"></div>
-      <div class="case" id="7" onclick="checkCase(this)"></div>
-      <div class="case" id="8" onclick="checkCase(this)"></div>
+    <div><button id="reset" class="btn remove" onclick="reset()">RESET</button></div>
+    <div id="biggerBoard">
+      <div id="p1" class="currentPlayer hidden"></div>
+      <div id="board">
+        <div class="case" id="0" onclick="checkCase(this)"></div>
+        <div class="case" id="1" onclick="checkCase(this)"></div>
+        <div class="case" id="2" onclick="checkCase(this)"></div>
+        <div class="case" id="3" onclick="checkCase(this)"></div>
+        <div class="case" id="4" onclick="checkCase(this)"></div>
+        <div class="case" id="5" onclick="checkCase(this)"></div>
+        <div class="case" id="6" onclick="checkCase(this)"></div>
+        <div class="case" id="7" onclick="checkCase(this)"></div>
+        <div class="case" id="8" onclick="checkCase(this)"></div>
+      </div>
+      <div id="p2" class="currentPlayer hidden"></div>
     </div>
-
-
-
   </div>
 
 

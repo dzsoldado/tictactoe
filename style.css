@@ -10,6 +10,39 @@
   box-sizing: border-box;
 }
 
+.btn{
+  padding: 1rem;
+  background-color: var(--purple);
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border: none;
+}
+
+.btn:active{
+  border: 1px solid var(--dark);
+}
+
+#message{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 2rem;
+  width: 100%;
+  height: 100%;
+  font-size: 3rem;
+  font-family: sans-serif;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.700);
+  transition: all 0.2s;
+}
+
 #container{
   max-width: 600px;
   margin: 0 auto;
@@ -33,6 +66,18 @@
   height: 10px;
 }
 
+#params{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  font-size: 2rem;
+}
+
+#biggerBoard{
+  display: flex;
+  align-items: center;
+}
 
 #board{
   margin: 0 auto;
@@ -41,6 +86,7 @@
   display: grid;
   grid-template-columns: 100px 100px 100px;
   grid-template-rows: 100px 100px 100px;
+  font-weight: bold;
 }
 
 .case{
@@ -53,4 +99,30 @@
   align-items: center;
   cursor: pointer;
   caret-color: transparent;
+}
+
+.currentPlayer{
+  font-size: 1.5rem;
+  margin: 1%;
+  text-align: center;
+  font-weight: bold;
+}
+
+
+.hidden{
+  visibility: hidden;
+}
+
+.remove{
+  display: none !important;
+}
+
+@media screen and (max-width: 600px){
+
+  #biggerBoard{
+    flex-direction :column;
+  }
+  #container{
+    gap: 1rem;
+  }
 }

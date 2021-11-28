@@ -13,15 +13,13 @@ class Player{
 }
 
 class Game{
-  constructor(symbol, p1name="Player1", p2name="Player2" ){
+  constructor(symbol, p1name="Player 1", p2name="Player 2" ){
     let symbols = ["X", "O"]
     let p2symbol = symbol == symbols[0] ? symbols[1] : symbols[0] ;
-    this.field = new Array(9);
+    this.field = new Array(9).fill(null);
     this.players = [new Player(symbol, p1name), new Player(p2symbol,p2name)];
     this.currentPlayer = this.players[Math.floor(Math.random()*2)]
 
-    console.log(this.players[0])
-    console.log(this.players[1])
 
   }
 
@@ -33,8 +31,16 @@ class Game{
     return this.field;
   }
 
-  GetCurrentSymbol(){
+  getPlayers(){
+    return this.players;
+  }
+
+  getCurrentSymbol(){
     return this.currentPlayer.getSymbol();
+  }
+
+  getCurrentPlayer(){
+    return this.currentPlayer;
   }
 
   next(){
@@ -57,44 +63,114 @@ class Game{
       return false;
     }
   }
-  play(indx){
-    this.field[indx] = this.GetCurrentSymbol();
 
-    if(this.isWon()){
-      alert(`Ahooy ${this.GetCurrentSymbol()} won!`)
-    }else{
-      this.next();
+  isDraw(){
+    if(!this.field.some(x => x == null)) return true;
+  }
+
+  play(indx){
+    if(!this.field[indx] && !this.isWon() && !this.isDraw()){
+      this.field[indx] = this.getCurrentSymbol();
+      if(!this.isWon() && !this.isDraw()){
+        this.next(); 
+      }
     }
   }
 
 }
 
 
-
-
-
 // UI LOGIC
 let game;
 
 function createGame(symb){
-  document.getElementById("params").style.display="none";
+  hideParams();
   game = new Game(symb);
+
+  // Initialize players' names
+  let players = game.getPlayers();
+  document.getElementById('p1').textContent = `${players[0].getName() + " (" + players[0].getSymbol() + ")" }`
+  document.getElementById('p2').textContent = `${players[1].getName() + " (" + players[1].getSymbol() + ")" }`
+  
+  if(game.getCurrentPlayer() == players[0]){
+    togglePlayer(0);
+  }else{
+    togglePlayer(1);
+  }
+  
 }
 
 function checkCase(ca){
-  if(ca.textContent == "" && !game.isWon()){
-    ca.textContent = game.GetCurrentSymbol();
-    game.play(ca.id);
+  if(!game){
+    alert("Choose a symbol first");
+  }else{
+    if(ca.textContent == "" && !game.isWon() && !game.isDraw()){
+      ca.textContent = game.getCurrentSymbol();
+      game.play(ca.id);
+      if(game.isWon()){
+        showMessage(`Ahooy, ${game.getCurrentPlayer().getName()} won!`);
+      }else{
+        if(game.isDraw()){
+          showMessage(`It's a draw!`);
+        }else{
+          togglePlayer();
+        }
+      }
+    }
   }
 }
 
 function reset(){
   cases = document.getElementsByClassName("case")
   for(let caz of cases){ caz.textContent = "" }
-  
-  // Show new game dialog
-  document.getElementById("params").style.display="block";
+  game = null;
+  resetPlayers();
+  showParams();
 }
 
-// createGame("X")
-// console.table(game.getField())
+function resetPlayers(){
+  document.getElementById('p1').classList.remove('hidden');
+  document.getElementById('p1').classList.add('hidden');
+
+  document.getElementById('p2').classList.remove('hidden');
+  document.getElementById('p2').classList.add('hidden');
+
+}
+
+function togglePlayer(x){
+  if(x===0){
+    document.getElementById('p1').classList.toggle('hidden');
+  }else{
+    if(x===1){
+      document.getElementById('p2').classList.toggle('hidden');
+    }else{
+      document.getElementById('p1').classList.toggle('hidden');
+      document.getElementById('p2').classList.toggle('hidden');
+    }
+  }
+}
+
+function showParams(){
+  document.getElementById("params").classList.remove("remove");
+  document.getElementById("reset").classList.add("remove");
+}
+
+function hideParams(){
+  document.getElementById("params").classList.add("remove");
+  document.getElementById("reset").classList.remove("remove");
+}
+
+function showMessage(msg){
+  let holder = document.getElementById('message');
+  let content = document.getElementById('message-content');
+  if (holder.classList.contains("hidden")){ 
+    holder.classList.remove("hidden");
+  }
+  content.textContent = msg;
+
+}
+function hideMessage(){
+  document.getElementById('message').classList.add('hidden')
+  reset();
+}
+
